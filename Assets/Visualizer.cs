@@ -25,14 +25,13 @@ namespace UltraFace
             _detector = new FaceDetector(_resources);
             RectTransform previewRect = _previewUI.rectTransform;
             previewWidth = previewRect.rect.width; //Preview height is fixed
-            previewHeight = previewRect.rect.width; //Preview height is fixed
+            previewHeight = previewRect.rect.height; //Preview height is fixed
         }
 
         void Update()
         {
-            _detector.ProcessImage(_source.Texture, _threshold);
-            
-            _previewUI.texture = _source.Texture;
+            _detector.ProcessImage(_source.AsRenderTexture, _threshold);
+            _previewUI.texture = _source.AsRenderTexture;
 
             DestroyAllBoxes();
             VisualizeResults();
